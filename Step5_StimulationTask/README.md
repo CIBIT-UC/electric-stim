@@ -4,6 +4,7 @@
 
 Arduino MEGA code for the main stimulation task. This code is uploaded to the Arduino board per run and subject.
 
+
 ## UnoController.m
 
 MATLAB code to control the Arduino Uno board. This code wait for the trigger from the MRI scanner and then send a start signal to the Arduino MEGA board.
@@ -22,10 +23,11 @@ function fastwriteDigitalPin(obj, pin, data)
     %   Set or Reset a digital pin.
     %
     %   Syntax:
-    %   writeDigitalPin(obj,pin,value)
+    %   fastwriteDigitalPin(obj,pin,value)
     %
     %   Description:
-    %   Writes specified value to the specified pin on the Arduino hardware.
+    %   Writes specified value to the specified pin on the Arduino hardware without
+    %   performing checks, hence much faster than writeDigitalPin.
     %
     %   Input Arguments:
     %   obj   - Low cost hardware object
