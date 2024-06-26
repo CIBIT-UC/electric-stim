@@ -1,5 +1,6 @@
 # electric-stim
 Code that supports the Electric stimulation device developed at CIBIT.
+
 Device development and assessment are described in detail in https://doi.org/10.1101/2024.05.27.595320
 
 ## Folders:
