@@ -3,7 +3,7 @@
 ## Final_StimulationTask_MRI.ino
 
 Arduino MEGA code for the main stimulation task. This code is uploaded to the Arduino board per run and subject.
-
+Note: Current (diference between Iset and Imon) is compensated at the software level.
 
 ## UnoController.m
 

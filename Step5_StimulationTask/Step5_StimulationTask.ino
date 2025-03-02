@@ -79,7 +79,7 @@ float output[2] = {0, 0};
 // ----------------------------------------------------------------------------------------- //
 // ----- Initialization -------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------------- /
-bool triggerFlag = true;                  // flag MRI trigger -- colocar a false para usar na MRI
+bool triggerFlag = true;                  // flag MRI trigger
 
 // ----- VOID SETUP ------------------------------------------------------------------------ //
 // ----------------------------------------------------------------------------------------- //
@@ -129,7 +129,7 @@ void loop() {
   // wait for trigger
   //Serial.println(analogRead(TriggerPin));
   
-  if (analogRead(TriggerPin) > 1000) { //trigger corresponde +/- a 5V portanto acima 1000 (0-5V --> 0-1023)
+  if (analogRead(TriggerPin) > 1000) { //trigger corresponds to ~5V, therefore > 1000 (0-5V --> 0-1023)
     triggerFlag = true;
   }
 
@@ -154,20 +154,18 @@ void loop() {
 
       //unsigned long StartTimeForLoop = millis(); Serial.print("StartTime ForLoop (ms) = "); Serial.println(StartTimeForLoop);
 
-      // ----- Define active and ground electrodes ----------------------------------------------------------------- //
+      // ----- Define ACTIVE and GROUND electrodes ----------------------------------------------------------------- //
 
       //unsigned long StartTimeSwitchElectrodes = millis();
 
       switchElectrodes(StimulationSequence_Active[electrodeIndex], StimulationSequence_Ground[electrodeIndex], SBPins, nSBPins);
-      //delay(4); //compensar tempo que demora a correr a função switchElectrodes (ms)
+      //delay(4); //compensate for switchElectrodes (ms)
 
       //unsigned long CurrentTimeSwitchElectrodes = millis();
       //unsigned long ElapsedTimeSwitchElectrodes = CurrentTimeSwitchElectrodes - StartTimeSwitchElectrodes; Serial.print("ElapsedTime SwitchElectrodes (ms) = "); Serial.println(ElapsedTimeSwitchElectrodes);
 
       // ----- Set VSet and ILim ----------------------------------------------------------------- //
-      // The true ILim value is the sum of ILimRange and ILimCompensation (this is necessary due to a small deviation in the stimulation board)
-
-      //unsigned long StartTimeSetValues = millis();
+      // The true ILim value is the sum of ILimRange and ILimCompensation (this is necessary due to a small deviation in the stimulation board
 
       float ILimCompensation = 0.15 * Currents[electrodeIndex];
       float ILimActualValue_Compensated = Currents[electrodeIndex] + ILimCompensation;
@@ -220,7 +218,7 @@ void loop() {
       //Serial.print("Imon max (0-2.5 V): "); Serial.println(output[1]);
       Serial.print("Imon max (0-5 mA):  "); Serial.println(output[1] * 2);            // conversion to mA
 
-      // break if stop signal is on
+      // break if STOP signal is on
       if (analogRead(StopPin) > 1000) {
         Serial.println("STOP received from Uno.");
         turnOffAll(SBPins, nSBPins);
@@ -299,7 +297,7 @@ float stimulate(int stimFrequency, int stimDuration, int intermittentOFF, int PW
 
   float ImonMax = maxValue(ImonArray) * (5 / 1023.0);                           // conversion to volts
   //Serial.print("Imon max (0-2.5 V): "); Serial.println(ImonMax);
-  //Serial.print("Imon max (0-5 mA): ");  Serial.println(ImonMax * 2);            // conversion to mA
+  //Serial.print("Imon max (0-5 mA): ");  Serial.println(ImonMax * 2);          // conversion to mA
 
   unsigned long StartTimeOFF = millis();
   unsigned long CurrentTimeOFF = millis();
@@ -435,7 +433,7 @@ void turnOffAll(int SBPins[], int nSBPins) {
 }
 
 /*
-  Set the active and ground electrodes based on the switch board operation logic.
+  Set the ACTIVE and GROUND electrodes based on the switch board operation logic.
 */
 void switchElectrodes(int activeElectrode, int groundElectrode, int SBPins[], int nSBPins) {
 
